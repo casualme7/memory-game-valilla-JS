@@ -21,15 +21,34 @@ let userInfo = document.querySelector(".userInfo");
 let scoreboardInfo = document.querySelector(".scoreboardInfo");
 let set3exit = document.querySelector(".set3exit");
 //
-let guessContents = ["Images/loki.jpg","Images/ironman.jpg","Images/doctorStrange.jpg","Images/nickFury.jpg","Images/blackWidow.jpeg","Images/thor.jpg","Images/blackPanther.jpg",
-"Images/spiderman.jpg","Images/hulk.jpg","Images/warMachine.jpg","Images/omniMan.jpg","Images/superman.jpg","Images/batman.jpg","Images/wonderWoman.jpg","Images/theFlash.jpg",
-"Images/aquaman.jpg","Images/thanos.jpg","Images/starlord.jpg","Images/stepenwolf.png","Images/brainiac.jpg","Images/kratos.jpg",
+let guessContents = [
+	"Images/loki.jpg",
+	"Images/ironman.jpg",
+	"Images/doctorStrange.jpg",
+	"Images/nickFury.jpg",
+	"Images/blackWidow.jpeg",
+	"Images/thor.jpg",
+	"Images/blackPanther.jpg",
+	"Images/spiderman.jpg",
+	"Images/hulk.jpg",
+	"Images/warMachine.jpg",
+	"Images/omniMan.jpg",
+	"Images/superman.jpg",
+	"Images/batman.jpg",
+	"Images/wonderWoman.jpg",
+	"Images/theFlash.jpg",
+	"Images/aquaman.jpg",
+	"Images/thanos.jpg",
+	"Images/starlord.jpg",
+	"Images/stepenwolf.png",
+	"Images/brainiac.jpg",
+	"Images/kratos.jpg",
 ];
 
 // LENGTH CONTROL (MAX = 21) + LOCAL STORAGE
 let localStorageArr = localStorage.arrayLength;
 if (localStorageArr) {
-	guessContents.length = localStorageArr
+	guessContents.length = localStorageArr;
 } else {
 	guessContents.length = 21;
 }
@@ -39,13 +58,13 @@ if (rngBackgroundPic) {
 	document.body.background = `Wallpapers/${rngBackgroundPic}.jpg`;
 	picInfo.innerHTML = localStorage.rngBackground;
 }
-let username = ""
+let username = "";
 if (localStorage.USERNAME) {
 	username = localStorage.USERNAME;
 	yourUsername.innerText = localStorage.USERNAME;
 } else {
-	username = `User_${Math.ceil(Math.random() * 10000)}`
-	yourUsername.innerText = `User_${Math.ceil(Math.random() * 10000)}`
+	username = `User_${Math.ceil(Math.random() * 10000)}`;
+	yourUsername.innerText = `User_${Math.ceil(Math.random() * 10000)}`;
 }
 // MAKES 2 RANDOMIZED ARAYS AND COMBINES THEM INTO ONE
 let randomArray = [...guessContents, ...guessContents];
@@ -71,7 +90,7 @@ let pick2 = null;
 let turn = false;
 let bugPerventionDelay = false;
 let scoreStarted = false;
-let score = ""
+let score = "";
 let intervalX;
 let winningCounter = guessContents.length;
 
@@ -101,62 +120,62 @@ for (let i = 0; i < guessContentFinal.length; i++) {
 document.body.addEventListener("click", (e) => {
 	if (!turn) {
 		if (!bugPerventionDelay) {
-		if (e.target.tagName === "IMG" && e.target.alt !== "") {
-			if (!scoreStarted) {
-				timeFrame();
-				scoreStarted = true;
-			}
-			e.target.style.transform = "rotateY(-90deg)";
-			setTimeout(() => {
-				e.target.style.visibility = "hidden";
-			}, 100);
-			if (!alt1) {
-				alt1 = e.target.alt;
-				pick1 = e.target;
-				bugPerventionDelay = true;
+			if (e.target.tagName === "IMG" && e.target.alt !== "") {
+				if (!scoreStarted) {
+					timeFrame();
+					scoreStarted = true;
+				}
+				e.target.style.transform = "rotateY(-90deg)";
 				setTimeout(() => {
-					bugPerventionDelay = false;
-				}, 710);
-			} else if (!alt2) {
-				if (!bugPerventionDelay) {
-				alt2 = e.target.alt;
-				pick2 = e.target;
-				turn = !turn;
+					e.target.style.visibility = "hidden";
+				}, 100);
+				if (!alt1) {
+					alt1 = e.target.alt;
+					pick1 = e.target;
+					bugPerventionDelay = true;
+					setTimeout(() => {
+						bugPerventionDelay = false;
+					}, 710);
+				} else if (!alt2) {
+					if (!bugPerventionDelay) {
+						alt2 = e.target.alt;
+						pick2 = e.target;
+						turn = !turn;
+					}
+				}
+				if (alt1 && alt2 && alt1 !== alt2) {
+					setTimeout(() => {
+						denied.play();
+						setTimeout(() => {
+							alt1 = "";
+							alt2 = "";
+							pick1.style.transform = "rotateY(0deg)";
+							pick1.style.visibility = "visible";
+							pick2.style.transform = "rotateY(0deg)";
+							pick2.style.visibility = "visible";
+							turn = !turn;
+						}, 500);
+					}, 1000);
+				} else if (alt1 && alt2 && alt1 === alt2) {
+					alt1 = "";
+					alt2 = "";
+					setTimeout(() => {
+						conffetti.play();
+						checkMark.play();
+						turn = !turn;
+						winningCounter--;
+						winningCounterFun();
+					}, 500);
 				}
 			}
-			if (alt1 && alt2 && alt1 !== alt2) {
-				setTimeout(() => {
-					denied.play();
-					setTimeout(() => {
-						alt1 = "";
-						alt2 = "";
-						pick1.style.transform = "rotateY(0deg)";
-						pick1.style.visibility = "visible";
-						pick2.style.transform = "rotateY(0deg)";
-						pick2.style.visibility = "visible";
-						turn = !turn;
-					}, 500);
-				}, 1000);
-			} else if (alt1 && alt2 && alt1 === alt2) {
-				alt1 = "";
-				alt2 = "";
-				setTimeout(() => {
-					conffetti.play();
-					checkMark.play();
-					turn = !turn;
-					winningCounter--;
-					winningCounterFun();
-				}, 500);
-			}
 		}
-	}
 	}
 });
 
 let obj = {
 	username: username,
-	score: score
-}
+	score: score,
+};
 
 // WINNING SOUND AND RELOAD IF YOU GUESS EVERYTHING
 let winningCounterFun = () => {
@@ -164,11 +183,12 @@ let winningCounterFun = () => {
 		cheer.play();
 		scoreStarted = false;
 		clearInterval(intervalX);
-		db.collection("timeAttack").add(obj).then(
-			console.log("Database entry Successfull!")
-		).catch(err => {
-			console.log("ERROR:",err)
-		});
+		db.collection("timeAttack")
+			.add(obj)
+			.then(console.log("Database entry Successfull!"))
+			.catch((err) => {
+				console.log("ERROR:", err);
+			});
 		setTimeout(() => {
 			location.reload();
 		}, 10500);
@@ -180,11 +200,11 @@ let timeFrame = () => {
 	scoreboard.style.visibility = "visible";
 	score = 0;
 	intervalX = setInterval(() => {
-		score+=1;
+		score += 1;
 		obj.score = score;
-		scoreboard.innerHTML = `Score: <span style="color: red">${score}<span>`
+		scoreboard.innerHTML = `Score: <span style="color: red">${score}<span>`;
 	}, 100);
-}
+};
 
 // CHANGE VALUE ACCODRING TO OPTION SELECTED
 pairSettings.addEventListener("change", function () {
@@ -230,18 +250,18 @@ stop1.addEventListener("click", () => {
 	click.play();
 	settingsMenu2.classList.remove("settingsExpanded");
 	settingsMenu2.classList.add("settingsShrinked");
-	document.body.style.background = "none"
+	document.body.style.background = "none";
 	document.body.style.backgroundColor = "#0a9396";
 	localStorage.removeItem("rngBackground");
 	location.reload();
-})
+});
 
 // SECRET
 secret.addEventListener("click", () => {
 	secretSound.play();
 	settingsMenu2.classList.remove("settingsExpanded");
 	settingsMenu2.classList.add("settingsShrinked");
-})
+});
 
 // NEXT BUTTON FOR RANDOMIZING THE BCKGR IMAGE
 next.addEventListener("click", () => {
@@ -249,10 +269,10 @@ next.addEventListener("click", () => {
 	settingsMenu2.classList.remove("settingsExpanded");
 	settingsMenu2.classList.add("settingsShrinked");
 	let rng = Math.ceil(Math.random() * 19);
-	localStorage.setItem("rngBackground",rng);
+	localStorage.setItem("rngBackground", rng);
 	picInfo.innerHTML = localStorage.rngBackground;
 	document.body.background = `Wallpapers/${rng}.jpg`;
-})
+});
 
 // FULL SCREEN BUTTON
 fullScreenButton.addEventListener("click", () => {
@@ -260,40 +280,44 @@ fullScreenButton.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
 	click.play();
-})
+});
 
 // SET1EXIT
 set1exit.addEventListener("click", () => {
 	settingsMenu2.classList.remove("settingsExpanded");
 	settingsMenu2.classList.add("settingsShrinked");
 	click.play();
-})
+});
 
 set2exit.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
 	click.play();
-})
+});
 
 updateUserButton.addEventListener("click", () => {
 	click.play();
-	if (updateUserInput.value.length < 10 && updateUserInput.value.length > 2 && username !== updateUserInput.value) {
-	localStorage.setItem("USERNAME", updateUserInput.value)
-	username = updateUserInput.value;
-	yourUsername.innerText = updateUserInput.value;
-	obj.username = updateUserInput.value;
-	updateUserInput.value = ""
-	updateUserInput.placeholder = "SUCCESSFULL!"
-	scoreboardInfo.classList.remove("settingsExpanded");
-	scoreboardInfo.classList.add("settingsShrinked");
+	if (
+		updateUserInput.value.length < 10 &&
+		updateUserInput.value.length > 2 &&
+		username !== updateUserInput.value
+	) {
+		localStorage.setItem("USERNAME", updateUserInput.value);
+		username = updateUserInput.value;
+		yourUsername.innerText = updateUserInput.value;
+		obj.username = updateUserInput.value;
+		updateUserInput.value = "";
+		updateUserInput.placeholder = "SUCCESSFULL!";
+		scoreboardInfo.classList.remove("settingsExpanded");
+		scoreboardInfo.classList.add("settingsShrinked");
 	} else if (username === updateUserInput.value) {
-		updateUserInput.value = ""
-		updateUserInput.placeholder = "Exact same nickname..."
+		updateUserInput.value = "";
+		updateUserInput.placeholder = "Exact same nickname...";
 	} else {
-		updateUserInput.value = ""
-		updateUserInput.placeholder = "Between 3 and 9 chars plz"
+		updateUserInput.value = "";
+		updateUserInput.placeholder = "Between 3 and 9 chars plz";
 	}
-})
+});
 
 userInfo.addEventListener("click", () => {
 	scoreboardInfo.classList.remove("settingsShrinked");
@@ -303,27 +327,29 @@ userInfo.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
 	click.play();
-})
+});
 
 set3exit.addEventListener("click", () => {
 	scoreboardInfo.classList.remove("settingsExpanded");
 	scoreboardInfo.classList.add("settingsShrinked");
 	click.play();
-})
+});
 
 //FULLSCREEN FUNC (FOR ALL BROWSERS)
 var elem = document.documentElement;
 //
 function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE11 */
-    elem.msRequestFullscreen();
-  }
+	if (elem.requestFullscreen) {
+		elem.requestFullscreen();
+	} else if (elem.webkitRequestFullscreen) {
+		/* Safari */
+		elem.webkitRequestFullscreen();
+	} else if (elem.msRequestFullscreen) {
+		/* IE11 */
+		elem.msRequestFullscreen();
+	}
 }
 
 // CONSOLE NOTES
-console.log("Small project i had fun on, nothing special")
-console.log("but could be interesting in right hands.")
+console.log("Small project i had fun on, nothing special");
+console.log("but could be interesting in right hands.");

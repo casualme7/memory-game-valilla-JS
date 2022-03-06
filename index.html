@@ -6,7 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="style.css" />
 		<link rel="shortcut icon" href="/Images/logo.png" type="image/x-icon" />
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Memory Game</title>
 	</head>
 	<body>
@@ -15,7 +18,11 @@
 			<h2>USERNAME</h2>
 			<p>Your username: <span class="yourUsername"></span></p>
 			<div>
-				<input type="text" class="updateUserInput" placeholder="Update username">
+				<input
+					type="text"
+					class="updateUserInput"
+					placeholder="Update username"
+				/>
 				<button class="updateUserButton">Update username</button>
 			</div>
 			<div class="set3exit">❌</div>
@@ -31,8 +38,11 @@
 				<p>Once you get the background</p>
 				<p>you like, it will be saved foever 😎</p>
 			</aside>
-			<aside>Picture <span class="picInfo">?</span> of <span class="picInfoMax">19</span></aside>
-			<aside class="googleWarning" style="font-size: 8px;">
+			<aside>
+				Picture <span class="picInfo">?</span> of
+				<span class="picInfoMax">19</span>
+			</aside>
+			<aside class="googleWarning" style="font-size: 8px">
 				<p>[ Some features work only ]</p>
 				<p>[ in Google Chrome browser ]</p>
 			</aside>
@@ -62,7 +72,7 @@
 				<p>you need to save</p>
 				<p>for it to be applied</p>
 			</aside>
-			<aside class="googleWarning" style="font-size: 8px;">
+			<aside class="googleWarning" style="font-size: 8px">
 				<p>[ Some features work only ]</p>
 				<p>[ in Google Chrome browser ]</p>
 			</aside>
@@ -73,12 +83,17 @@
 		<main>
 			<section class="content"></section>
 		</main>
-		<footer>Made by <a target="_blank" href="https://www.instagram.com/miljanpantoviic/?hl=sr">M.P.</a></footer>
-		
+		<footer>
+			Made by
+			<a target="_blank" href="https://www.instagram.com/miljanpantoviic/?hl=sr"
+				>M.P.</a
+			>
+		</footer>
+
 		<!-- The core Firebase JS SDK is always required and must be listed first -->
 		<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
-	
+
 		<script>
 			const firebaseConfig = {
 				apiKey: "AIzaSyCwEoGevK7k01q8wgoDYlcMwjzvV-RwbYA",
@@ -87,9 +102,9 @@
 				storageBucket: "myfirstproject-198bb.appspot.com",
 				messagingSenderId: "411401980078",
 				appId: "1:411401980078:web:7b861a44206b7a107dc53f",
-				measurementId: "G-GJRZQRGH7J"
+				measurementId: "G-GJRZQRGH7J",
 			};
-	
+
 			// Initialize Firebase
 			firebase.initializeApp(firebaseConfig);
 			let db = firebase.firestore();
