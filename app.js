@@ -50,11 +50,14 @@ let guessContents = [
 ];
 
 // LENGTH CONTROL (MAX = 21) + LOCAL STORAGE
+let level = null;
 let localStorageArr = localStorage.arrayLength;
 if (localStorageArr) {
 	guessContents.length = localStorageArr;
+	level = localStorageArr;
 } else {
 	guessContents.length = 21;
+	level = guessContents.length;
 }
 //
 let rngBackgroundPic = localStorage.rngBackground;
@@ -179,6 +182,7 @@ document.body.addEventListener("click", (e) => {
 let obj = {
 	username: username,
 	score: score,
+	level: level,
 };
 
 // WINNING SOUND AND RELOAD IF YOU GUESS EVERYTHING
@@ -268,6 +272,7 @@ let databaseData = async () => {
 pairSettings.addEventListener("change", function () {
 	let valueX = parseInt(this.value);
 	localStorage.setItem("arrayLength", valueX);
+	level = parseInt(this.value);
 	click.play();
 });
 
