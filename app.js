@@ -218,11 +218,13 @@ fullScreenButton.addEventListener("click", () => {
 set1exit.addEventListener("click", () => {
 	settingsMenu2.classList.remove("settingsExpanded");
 	settingsMenu2.classList.add("settingsShrinked");
+	click.play();
 })
 
 set2exit.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
+	click.play();
 })
 
 //FULLSCREEN FUNC (FOR ALL BROWSERS)
