@@ -258,6 +258,7 @@ footer a {
 	background-color: rgba(218, 218, 218, 0.767);
 	visibility: hidden;
 	font-weight: bold;
+	z-index: 10;
 }
 
 .userInfo {
@@ -269,7 +270,7 @@ footer a {
 
 .scoreboardInfo {
 	position: absolute;
-	width: 200px;
+	width: 230px;
 	z-index: 2;
 	background-color: rgba(245, 245, 245, 0.95);
 	border-radius: 5px;
@@ -283,11 +284,11 @@ footer a {
 
 .scoreboardInfo h2 {
 	margin-top: 30px;
-	/* text-shadow: 0px 0px 20px black, 0px 0px 3px rgba(0, 0, 255, 0.418); */
+	text-shadow: 0px 0px 20px black, 0px 0px 3px rgba(0, 243, 20, 0.418);
 }
 
 .scoreboardInfo p {
-	margin-top: 35px;
+	margin-top: 30px;
 	font-size: 11px;
 	font-weight: bold;
 }
@@ -305,17 +306,57 @@ footer a {
 
 .scoreboardInfo button {
 	margin-top: 25px;
-	margin-bottom: 15px;
+	margin-bottom: 25px;
 	padding: 10px;
 	border-radius: 10px;
 	border: 2px solid white;
 	color: white;
 	background-color: black;
-	box-shadow: 0px 0px 15px 3px black;
+	box-shadow: 0px 0px 1px 1px black;
 	transition: 500ms;
 }
 
 .set3exit {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+}
+
+.dbTop10 {
+	position: absolute;
+	top: 5px;
+	left: 95px;
+	cursor: pointer;
+}
+
+.dbTop10Field {
+	position: absolute;
+	width: 230px;
+	z-index: 2;
+	background-color: rgba(245, 245, 245, 0.95);
+	border-radius: 5px;
+	text-align: center;
+	margin: 0 auto;
+	background: url(Images/conffetti2.gif);
+}
+
+.dbTop10Field h2 {
+	margin-top: 30px;
+	text-shadow: 0px 0px 20px black, 0px 0px 5px rgb(255, 208, 0);
+}
+
+.scoreboardData {
+	margin-top: 35px;
+}
+
+.scoreboardDataParticles {
+	display: block;
+	background-color: rgb(173, 173, 173);
+	padding: 10px;
+}
+
+.set4exit {
 	position: absolute;
 	top: 0px;
 	right: 0px;

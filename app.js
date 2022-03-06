@@ -20,6 +20,10 @@ let updateUserButton = document.querySelector(".updateUserButton");
 let userInfo = document.querySelector(".userInfo");
 let scoreboardInfo = document.querySelector(".scoreboardInfo");
 let set3exit = document.querySelector(".set3exit");
+let dbTop10Field = document.querySelector(".dbTop10Field");
+let dbTop10 = document.querySelector(".dbTop10");
+let scoreboardData = document.querySelector(".scoreboardData");
+let set4exit = document.querySelector(".set4exit");
 //
 let guessContents = [
 	"Images/loki.jpg",
@@ -206,6 +210,60 @@ let timeFrame = () => {
 	}, 100);
 };
 
+// FIREBASE FETCHING DATA
+let databaseData = async () => {
+	let counter = 1;
+	let response = await db
+		.collection("timeAttack")
+		.orderBy("score", "asc")
+		.limit(10)
+		.get()
+		.then()
+		.catch((err) => {
+			console.log("ERROR fetching TOP list:", err);
+		});
+	response.forEach((result) => {
+		let newDiv = document.createElement("div");
+		let newSpan = document.createElement("span");
+		let newSpan2 = document.createElement("span");
+		let newSpan3 = document.createElement("span");
+		newSpan.innerHTML = `<span>${counter}</span>.`;
+		newSpan2.innerHTML = ` ${result.data().username} -`;
+		newSpan3.innerHTML = ` ${result.data().score}p`;
+		if (counter === 1) {
+			newSpan.style.color = "yellow";
+			newSpan.style.fontWeight = "bold";
+			newSpan.style.textShadow = "0px 0px 10px red";
+			newSpan2.style.color = "yellow";
+			newSpan2.style.fontWeight = "bold";
+			newSpan2.style.textShadow = "0px 0px 10px red";
+			newSpan3.style.fontWeight = "bold";
+		} else if (counter === 2) {
+			newSpan.style.color = "lightgray";
+			newSpan.style.fontWeight = "bold";
+			newSpan.style.textShadow = "0px 0px 10px black";
+			newSpan2.style.color = "lightgray";
+			newSpan2.style.fontWeight = "bold";
+			newSpan2.style.textShadow = "0px 0px 10px black";
+			newSpan3.style.fontWeight = "bold";
+		} else if (counter === 3) {
+			newSpan.style.color = "rgb(150, 102, 0)";
+			newSpan.style.fontWeight = "bold";
+			newSpan.style.textShadow = "0px 0px 10px orange";
+			newSpan2.style.color = "rgb(150, 102, 0)";
+			newSpan2.style.fontWeight = "bold";
+			newSpan2.style.textShadow = "0px 0px 10px orange";
+			newSpan3.style.fontWeight = "bold";
+		}
+		newDiv.appendChild(newSpan);
+		newDiv.appendChild(newSpan2);
+		newDiv.appendChild(newSpan3);
+		newDiv.classList.add("scoreboardDataParticles");
+		counter++;
+		scoreboardData.appendChild(newDiv);
+	});
+};
+
 // CHANGE VALUE ACCODRING TO OPTION SELECTED
 pairSettings.addEventListener("change", function () {
 	let valueX = parseInt(this.value);
@@ -221,6 +279,8 @@ setting.addEventListener("click", () => {
 	settingsMenu2.classList.add("settingsShrinked");
 	scoreboardInfo.classList.remove("settingsExpanded");
 	scoreboardInfo.classList.add("settingsShrinked");
+	dbTop10Field.classList.remove("settingsExpanded");
+	dbTop10Field.classList.add("settingsShrinked");
 	click.play();
 });
 
@@ -242,6 +302,8 @@ setting2.addEventListener("click", () => {
 	settingsMenu.classList.add("settingsShrinked");
 	scoreboardInfo.classList.remove("settingsExpanded");
 	scoreboardInfo.classList.add("settingsShrinked");
+	dbTop10Field.classList.remove("settingsExpanded");
+	dbTop10Field.classList.add("settingsShrinked");
 	click.play();
 });
 
@@ -326,12 +388,34 @@ userInfo.addEventListener("click", () => {
 	settingsMenu2.classList.add("settingsShrinked");
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
+	dbTop10Field.classList.remove("settingsExpanded");
+	dbTop10Field.classList.add("settingsShrinked");
 	click.play();
 });
 
 set3exit.addEventListener("click", () => {
 	scoreboardInfo.classList.remove("settingsExpanded");
 	scoreboardInfo.classList.add("settingsShrinked");
+	click.play();
+});
+
+dbTop10.addEventListener("click", () => {
+	click.play();
+	scoreboardData.innerHTML = "";
+	scoreboardInfo.classList.remove("settingsExpanded");
+	scoreboardInfo.classList.add("settingsShrinked");
+	settingsMenu2.classList.remove("settingsExpanded");
+	settingsMenu2.classList.add("settingsShrinked");
+	settingsMenu.classList.remove("settingsExpanded");
+	settingsMenu.classList.add("settingsShrinked");
+	dbTop10Field.classList.remove("settingsShrinked");
+	dbTop10Field.classList.add("settingsExpanded");
+	databaseData();
+});
+
+set4exit.addEventListener("click", () => {
+	dbTop10Field.classList.remove("settingsExpanded");
+	dbTop10Field.classList.add("settingsShrinked");
 	click.play();
 });
 
