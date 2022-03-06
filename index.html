@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="shortcut icon" href="/Images/logo.png" type="image/x-icon" />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"/>
+		<title>Memory Game</title>
+	</head>
+	<body>
+		<div class="settings2">👍</div>
+		<div class="settingsMenu2 settingsShrinked">
+			<h2>Random Background Generator</h2>
+			<aside>
+				<p>If you see a <span class="blueWarning">BLUE</span> background</p>
+				<p>That means it's a default one</p>
+				<p>And you didnt set any other</p>
+				<p>Once you get the background</p>
+				<p>you like, it will be saved foever 😎</p>
+			</aside>
+			<section>
+				<button id="stop">DEFAULT</button>
+				<button id="secret">SECRET</button>
+				<button id="next">NEXT</button>
+			</section>
+		</div>
+		<div class="settings">❌</div>
+		<div class="settingsMenu settingsShrinked">
+			<h2>SETTINGS</h2>
+			<div>
+				<label for="pairSettings">Number of pairs:</label>
+				<select name="" id="pairSettings">
+					<option selected value="">Pick</option>
+					<option value="21">Max</option>
+					<option value="15">15</option>
+					<option value="10">10</option>
+					<option value="5">5</option>
+					<option value="2">2</option>
+				</select>
+			</div>
+			<aside>
+				<p>When you pick ↑</p>
+				<p>you need to save</p>
+				<p>for it to be applied</p>
+			</aside>
+			<button class="fullScreenButton">FULLSCREEN</button>
+			<button class="exitButton">SAVE & RETURN</button>
+		</div>
+		<main>
+			<section class="content"></section>
+		</main>
+		<footer>Made by <a target="_blank" href="https://www.instagram.com/miljanpantoviic/?hl=sr">M.P.</a></footer>
+		<script src="app.js"></script>
+	</body>
+</html>
