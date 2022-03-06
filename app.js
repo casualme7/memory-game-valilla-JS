@@ -181,6 +181,7 @@ stop1.addEventListener("click", () => {
 	document.body.style.background = "none"
 	document.body.style.backgroundColor = "#0a9396";
 	localStorage.removeItem("rngBackground");
+	location.reload();
 })
 
 // SECRET
