@@ -143,7 +143,7 @@ document.body.addEventListener("click", (e) => {
 					bugPerventionDelay = true;
 					setTimeout(() => {
 						bugPerventionDelay = false;
-					}, 710);
+					}, 210);
 				} else if (!alt2) {
 					if (!bugPerventionDelay) {
 						alt2 = e.target.alt;
@@ -162,8 +162,8 @@ document.body.addEventListener("click", (e) => {
 							pick2.style.transform = "rotateY(0deg)";
 							pick2.style.visibility = "visible";
 							turn = !turn;
-						}, 500);
-					}, 1000);
+						}, 300);
+					}, 400);
 				} else if (alt1 && alt2 && alt1 === alt2) {
 					alt1 = "";
 					alt2 = "";
@@ -378,7 +378,7 @@ set2exit.addEventListener("click", () => {
 updateUserButton.addEventListener("click", () => {
 	click.play();
 	if (
-		updateUserInput.value.length < 10 &&
+		updateUserInput.value.length <= 12 &&
 		updateUserInput.value.length > 2 &&
 		username !== updateUserInput.value
 	) {
@@ -395,7 +395,7 @@ updateUserButton.addEventListener("click", () => {
 		updateUserInput.placeholder = "Exact same nickname...";
 	} else {
 		updateUserInput.value = "";
-		updateUserInput.placeholder = "Between 3 and 9 chars plz";
+		updateUserInput.placeholder = "Between 3 & 11 chars plz";
 	}
 });
 
