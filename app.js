@@ -10,6 +10,9 @@ let fullScreenButton = document.querySelector(".fullScreenButton");
 let stop1 = document.querySelector("#stop");
 let next = document.querySelector("#next");
 let secret = document.querySelector("#secret");
+let set1exit = document.querySelector(".set1exit");
+let set2exit = document.querySelector(".set2exit");
+let picInfo = document.querySelector(".picInfo");
 //
 let guessContents = ["Images/loki.jpg","Images/ironman.jpg","Images/doctorStrange.jpg","Images/nickFury.jpg","Images/blackWidow.jpeg","Images/thor.jpg","Images/blackPanther.jpg",
 "Images/spiderman.jpg","Images/hulk.jpg","Images/warMachine.jpg","Images/omniMan.jpg","Images/superman.jpg","Images/batman.jpg","Images/wonderWoman.jpg","Images/theFlash.jpg",
@@ -27,6 +30,7 @@ if (localStorageArr) {
 let rngBackgroundPic = localStorage.rngBackground;
 if (rngBackgroundPic) {
 	document.body.background = `Wallpapers/${rngBackgroundPic}.jpg`;
+	picInfo.innerHTML = localStorage.rngBackground;
 }
 // MAKES 2 RANDOMIZED ARAYS AND COMBINES THEM INTO ONE
 let randomArray = [...guessContents, ...guessContents];
@@ -198,6 +202,7 @@ next.addEventListener("click", () => {
 	settingsMenu2.classList.add("settingsShrinked");
 	let rng = Math.ceil(Math.random() * 19);
 	localStorage.setItem("rngBackground",rng);
+	picInfo.innerHTML = localStorage.rngBackground;
 	document.body.background = `Wallpapers/${rng}.jpg`;
 })
 
@@ -207,6 +212,17 @@ fullScreenButton.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
 	click.play();
+})
+
+// SET1EXIT
+set1exit.addEventListener("click", () => {
+	settingsMenu2.classList.remove("settingsExpanded");
+	settingsMenu2.classList.add("settingsShrinked");
+})
+
+set2exit.addEventListener("click", () => {
+	settingsMenu.classList.remove("settingsExpanded");
+	settingsMenu.classList.add("settingsShrinked");
 })
 
 //FULLSCREEN FUNC (FOR ALL BROWSERS)

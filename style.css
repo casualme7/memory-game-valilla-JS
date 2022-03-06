@@ -217,6 +217,30 @@ footer a {
 	text-shadow: 0px 0px 1px red, 0px 0px 5px red;
 }
 
+.set1exit,.set2exit {
+	position: absolute;
+	right: 0px;
+	cursor: pointer;
+}
+
+.set1exit {
+	top: 0px;
+}
+
+.set2exit {
+	top: -35px;
+}
+
+.picInfo {
+	font-weight: bold;
+	color: rgb(0, 110, 255);
+}
+
+.picInfoMax {
+	font-weight: bold;
+	color: rgb(196, 127, 0);
+}
+
 @media only screen and (max-width: 700px) {
 	body {
 	  display: block;
