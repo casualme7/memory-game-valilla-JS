@@ -196,6 +196,12 @@ button:hover{
 	translate: 1000ms;
 }
 
+.googleWarning {
+	color: red;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
 footer {
 	position: fixed;
 	bottom: 10px;
