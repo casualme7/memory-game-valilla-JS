@@ -347,7 +347,7 @@ footer a {
 }
 
 .scoreboardData {
-	margin-top: 35px;
+	margin-top: 20px;
 }
 
 .scoreboardDataParticles {
@@ -361,6 +361,19 @@ footer a {
 	top: 0px;
 	right: 0px;
 	cursor: pointer;
+}
+
+#forLevelScoreboard,
+.labelScoreboard {
+	font-size: 11px;
+	margin-top: 35px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+#forLevelScoreboard {
+	border: 2px solid black;
+	border-radius: 5px;
 }
 
 @media only screen and (max-width: 700px) {

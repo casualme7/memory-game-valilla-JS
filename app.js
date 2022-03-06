@@ -24,6 +24,7 @@ let dbTop10Field = document.querySelector(".dbTop10Field");
 let dbTop10 = document.querySelector(".dbTop10");
 let scoreboardData = document.querySelector(".scoreboardData");
 let set4exit = document.querySelector(".set4exit");
+let forLevelScoreboard = document.querySelector("#forLevelScoreboard");
 //
 let guessContents = [
 	"Images/loki.jpg",
@@ -50,14 +51,14 @@ let guessContents = [
 ];
 
 // LENGTH CONTROL (MAX = 21) + LOCAL STORAGE
-let level = null;
+let levelPicked = "21";
+let level = "21";
 let localStorageArr = localStorage.arrayLength;
 if (localStorageArr) {
 	guessContents.length = localStorageArr;
 	level = localStorageArr;
 } else {
 	guessContents.length = 21;
-	level = guessContents.length;
 }
 //
 let rngBackgroundPic = localStorage.rngBackground;
@@ -219,6 +220,7 @@ let databaseData = async () => {
 	let counter = 1;
 	let response = await db
 		.collection("timeAttack")
+		.where("level", "==", levelPicked)
 		.orderBy("score", "asc")
 		.limit(10)
 		.get()
@@ -267,6 +269,14 @@ let databaseData = async () => {
 		scoreboardData.appendChild(newDiv);
 	});
 };
+
+// FOR LEVEL SCOREBOARD
+forLevelScoreboard.addEventListener("change", () => {
+	levelPicked = forLevelScoreboard.value;
+	scoreboardData.innerHTML = "";
+	databaseData();
+	click.play();
+});
 
 // CHANGE VALUE ACCODRING TO OPTION SELECTED
 pairSettings.addEventListener("change", function () {
@@ -356,12 +366,15 @@ set1exit.addEventListener("click", () => {
 	click.play();
 });
 
+// SET2EXIT
 set2exit.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
 	click.play();
 });
 
+// UPDATING USERNAME FROM THE INPUT
+// AND SETTING LOCALSTORAGE
 updateUserButton.addEventListener("click", () => {
 	click.play();
 	if (
@@ -386,6 +399,7 @@ updateUserButton.addEventListener("click", () => {
 	}
 });
 
+// USERINFO TOP LEFT ICON
 userInfo.addEventListener("click", () => {
 	scoreboardInfo.classList.remove("settingsShrinked");
 	scoreboardInfo.classList.add("settingsExpanded");
@@ -398,12 +412,14 @@ userInfo.addEventListener("click", () => {
 	click.play();
 });
 
+// SET3EXIT
 set3exit.addEventListener("click", () => {
 	scoreboardInfo.classList.remove("settingsExpanded");
 	scoreboardInfo.classList.add("settingsShrinked");
 	click.play();
 });
 
+// SCOREBOAD ICON IN TOP-LEFT
 dbTop10.addEventListener("click", () => {
 	click.play();
 	scoreboardData.innerHTML = "";
@@ -418,6 +434,7 @@ dbTop10.addEventListener("click", () => {
 	databaseData();
 });
 
+// SET4EXIT
 set4exit.addEventListener("click", () => {
 	dbTop10Field.classList.remove("settingsExpanded");
 	dbTop10Field.classList.add("settingsShrinked");
