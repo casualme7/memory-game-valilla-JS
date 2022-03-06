@@ -13,6 +13,13 @@ let secret = document.querySelector("#secret");
 let set1exit = document.querySelector(".set1exit");
 let set2exit = document.querySelector(".set2exit");
 let picInfo = document.querySelector(".picInfo");
+let scoreboard = document.querySelector(".scoreboard");
+let yourUsername = document.querySelector(".yourUsername");
+let updateUserInput = document.querySelector(".updateUserInput");
+let updateUserButton = document.querySelector(".updateUserButton");
+let userInfo = document.querySelector(".userInfo");
+let scoreboardInfo = document.querySelector(".scoreboardInfo");
+let set3exit = document.querySelector(".set3exit");
 //
 let guessContents = ["Images/loki.jpg","Images/ironman.jpg","Images/doctorStrange.jpg","Images/nickFury.jpg","Images/blackWidow.jpeg","Images/thor.jpg","Images/blackPanther.jpg",
 "Images/spiderman.jpg","Images/hulk.jpg","Images/warMachine.jpg","Images/omniMan.jpg","Images/superman.jpg","Images/batman.jpg","Images/wonderWoman.jpg","Images/theFlash.jpg",
@@ -31,6 +38,14 @@ let rngBackgroundPic = localStorage.rngBackground;
 if (rngBackgroundPic) {
 	document.body.background = `Wallpapers/${rngBackgroundPic}.jpg`;
 	picInfo.innerHTML = localStorage.rngBackground;
+}
+let username = ""
+if (localStorage.USERNAME) {
+	username = localStorage.USERNAME;
+	yourUsername.innerText = localStorage.USERNAME;
+} else {
+	username = `User_${Math.ceil(Math.random() * 10000)}`
+	yourUsername.innerText = `User_${Math.ceil(Math.random() * 10000)}`
 }
 // MAKES 2 RANDOMIZED ARAYS AND COMBINES THEM INTO ONE
 let randomArray = [...guessContents, ...guessContents];
@@ -55,6 +70,9 @@ let pick1 = null;
 let pick2 = null;
 let turn = false;
 let bugPerventionDelay = false;
+let scoreStarted = false;
+let score = ""
+let intervalX;
 let winningCounter = guessContents.length;
 
 // MAIN GENERATOR
@@ -84,6 +102,10 @@ document.body.addEventListener("click", (e) => {
 	if (!turn) {
 		if (!bugPerventionDelay) {
 		if (e.target.tagName === "IMG" && e.target.alt !== "") {
+			if (!scoreStarted) {
+				timeFrame();
+				scoreStarted = true;
+			}
 			e.target.style.transform = "rotateY(-90deg)";
 			setTimeout(() => {
 				e.target.style.visibility = "hidden";
@@ -127,20 +149,42 @@ document.body.addEventListener("click", (e) => {
 				}, 500);
 			}
 		}
-		}
+	}
 	}
 });
+
+let obj = {
+	username: username,
+	score: score
+}
 
 // WINNING SOUND AND RELOAD IF YOU GUESS EVERYTHING
 let winningCounterFun = () => {
 	if (winningCounter <= 0) {
-		console.log("YEEEEY");
 		cheer.play();
+		scoreStarted = false;
+		clearInterval(intervalX);
+		db.collection("timeAttack").add(obj).then(
+			console.log("Database entry Successfull!")
+		).catch(err => {
+			console.log("ERROR:",err)
+		});
 		setTimeout(() => {
 			location.reload();
 		}, 10500);
 	}
 };
+
+// SCOREBOARD
+let timeFrame = () => {
+	scoreboard.style.visibility = "visible";
+	score = 0;
+	intervalX = setInterval(() => {
+		score+=1;
+		obj.score = score;
+		scoreboard.innerHTML = `Score: <span style="color: red">${score}<span>`
+	}, 100);
+}
 
 // CHANGE VALUE ACCODRING TO OPTION SELECTED
 pairSettings.addEventListener("change", function () {
@@ -155,6 +199,8 @@ setting.addEventListener("click", () => {
 	settingsMenu.classList.add("settingsExpanded");
 	settingsMenu2.classList.remove("settingsExpanded");
 	settingsMenu2.classList.add("settingsShrinked");
+	scoreboardInfo.classList.remove("settingsExpanded");
+	scoreboardInfo.classList.add("settingsShrinked");
 	click.play();
 });
 
@@ -174,6 +220,8 @@ setting2.addEventListener("click", () => {
 	settingsMenu2.classList.add("settingsExpanded");
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
+	scoreboardInfo.classList.remove("settingsExpanded");
+	scoreboardInfo.classList.add("settingsShrinked");
 	click.play();
 });
 
@@ -224,6 +272,42 @@ set1exit.addEventListener("click", () => {
 set2exit.addEventListener("click", () => {
 	settingsMenu.classList.remove("settingsExpanded");
 	settingsMenu.classList.add("settingsShrinked");
+	click.play();
+})
+
+updateUserButton.addEventListener("click", () => {
+	click.play();
+	if (updateUserInput.value.length < 10 && updateUserInput.value.length > 2 && username !== updateUserInput.value) {
+	localStorage.setItem("USERNAME", updateUserInput.value)
+	username = updateUserInput.value;
+	yourUsername.innerText = updateUserInput.value;
+	obj.username = updateUserInput.value;
+	updateUserInput.value = ""
+	updateUserInput.placeholder = "SUCCESSFULL!"
+	scoreboardInfo.classList.remove("settingsExpanded");
+	scoreboardInfo.classList.add("settingsShrinked");
+	} else if (username === updateUserInput.value) {
+		updateUserInput.value = ""
+		updateUserInput.placeholder = "Exact same nickname..."
+	} else {
+		updateUserInput.value = ""
+		updateUserInput.placeholder = "Between 3 and 9 chars plz"
+	}
+})
+
+userInfo.addEventListener("click", () => {
+	scoreboardInfo.classList.remove("settingsShrinked");
+	scoreboardInfo.classList.add("settingsExpanded");
+	settingsMenu2.classList.remove("settingsExpanded");
+	settingsMenu2.classList.add("settingsShrinked");
+	settingsMenu.classList.remove("settingsExpanded");
+	settingsMenu.classList.add("settingsShrinked");
+	click.play();
+})
+
+set3exit.addEventListener("click", () => {
+	scoreboardInfo.classList.remove("settingsExpanded");
+	scoreboardInfo.classList.add("settingsShrinked");
 	click.play();
 })
 

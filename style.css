@@ -44,6 +44,11 @@ div {
 	padding: 0px;
 	transition: 500ms;
 	overflow: hidden;
+	/* Just a fix for all browsers */
+	-webkit-overflow: hidden;
+	-moz-overflow: hidden;
+	-ms-overflow: hidden;
+	-o-overflow: hidden;
 	margin: 5px;
 	border-radius: 5px;
 }
@@ -241,6 +246,79 @@ footer a {
 	color: rgb(196, 127, 0);
 }
 
+.scoreboard {
+	position: fixed;
+	top: 5px;
+	border: transparent;
+	width: 100px;
+	text-align: center;
+	background-color: rgba(218, 218, 218, 0.767);
+	visibility: hidden;
+	font-weight: bold;
+}
+
+.userInfo {
+	position: absolute;
+	top: 5px;
+	left: 50px;
+	cursor: pointer;
+}
+
+.scoreboardInfo {
+		position: absolute;
+		width: 200px;
+		z-index: 2;
+		background-color: rgba(245, 245, 245, 0.95);
+		border-radius: 5px;
+		text-align: center;
+		margin: 0 auto;
+}
+
+.updateUserInput {
+	text-align: center;
+}
+
+.scoreboardInfo h2 {
+	margin-top: 30px;
+	/* text-shadow: 0px 0px 20px black, 0px 0px 3px rgba(0, 0, 255, 0.418); */
+}
+
+.scoreboardInfo p {
+	margin-top: 35px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.scoreboardInfo p span {
+	color: red;
+	font-size: 14px;
+}
+
+.scoreboardInfo input {
+	margin-top: 10px;
+	border-radius: 5px;
+	border: 2px solid black;
+}
+
+.scoreboardInfo button {
+	margin-top: 25px;
+	margin-bottom: 15px;
+	padding: 10px;
+	border-radius: 10px;
+	border: 2px solid white;
+	color: white;
+	background-color: black;
+	box-shadow: 0px 0px 15px 3px black;
+	transition: 500ms;
+}
+
+.set3exit {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+}
+
 @media only screen and (max-width: 700px) {
 	body {
 	  display: block;
@@ -260,6 +338,10 @@ footer a {
 		left: 50%;
 		transform: translate(-50%,0%);
 		font-size: 8px;
+	}
+	.scoreboard {
+		left: 50%;
+		transform: translate(-50%,0%);
 	}
 }
 
